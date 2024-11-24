@@ -99,8 +99,12 @@ def main():
             token = account['token']
             proxy = account['proxy']
 
-            # Cấu hình proxy HTTP với thông tin đăng nhập (user:pass@ip:port)
-            username, password, proxy_ip, proxy_port = proxy.split(":")
+            # Kiểm tra và tách proxy với định dạng user:pass@ip:port
+            user_pass, ip_port = proxy.split('@')
+            username, password = user_pass.split(':')
+            proxy_ip, proxy_port = ip_port.split(':')
+
+            # Cấu hình proxy HTTP với thông tin đăng nhập
             proxies = {
                 "http": f"http://{username}:{password}@{proxy_ip}:{proxy_port}",
                 "https": f"http://{username}:{password}@{proxy_ip}:{proxy_port}"
