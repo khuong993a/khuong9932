@@ -99,10 +99,11 @@ def main():
             token = account['token']
             proxy = account['proxy']
 
-            # Cấu hình proxy
+            # Cấu hình proxy HTTP với thông tin đăng nhập (user:pass@ip:port)
+            username, password, proxy_ip, proxy_port = proxy.split(":")
             proxies = {
-                "http": f"socks5h://{proxy}",
-                "https": f"socks5h://{proxy}"
+                "http": f"http://{username}:{password}@{proxy_ip}:{proxy_port}",
+                "https": f"http://{username}:{password}@{proxy_ip}:{proxy_port}"
             }
 
             headers = {
